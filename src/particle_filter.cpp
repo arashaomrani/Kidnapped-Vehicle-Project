@@ -150,8 +150,8 @@ void ParticleFilter::updateWeights(double sensor_range, double std_landmark[],
 
     	for(const auto& obs: observations){
 			LandmarkObs tmp;
-			tmp.x = obs.x * cos(p.theta) - obs.y * ssin(p.theta) + p.x;
-			tmp.y = obs.x * ssin(p.theta) + obs.y * cos(p.theta) + p.y;
+			tmp.x = obs.x * cos(p.theta) - obs.y * sin(p.theta) + p.x;
+			tmp.y = obs.x * sin(p.theta) + obs.y * cos(p.theta) + p.y;
 			//tmp.id = obs.id; // maybe an unnecessary step, since the each obersation will get the id from dataAssociation step.
 			observations_map.push_back(tmp);
 	}
@@ -196,9 +196,8 @@ void ParticleFilter::resample() {
 	  // Replace old particles with the resampled particles
 	  particles = new_particles;
 	
-	}
-
 }
+
 
 Particle ParticleFilter::SetAssociations(Particle& particle, const std::vector<int>& associations, 
                                      const std::vector<double>& sense_x, const std::vector<double>& sense_y)
